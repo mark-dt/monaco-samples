@@ -1,54 +1,33 @@
-name: CI Pipeline
+name: Dynatrace Configuration as Code Pipeline
 
-# Define when the workflow should run
 on:
   push:
     branches:
-      - main  # Trigger only when changes are pushed to the 'main' branch
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-
-  debug-docker:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Pull Docker Image
-        run: docker pull dynatrace/dynatrace-configuration-as-code:latest
-
-      - name: Check Available Commands
-        run: docker run --rm dynatrace/dynatrace-configuration-as-code:latest --help
-
-      - name: Interactive Debugging
-        run: docker run --rm -it dynatrace/dynatrace-configuration-as-code:latest /bin/sh
-  sync-dynatrace:
-    # Specify the type of machine to run this job
+  dynatrace-configuration:
+    name: Deploy Dynatrace Configuration
     runs-on: ubuntu-latest
 
     steps:
-      # Use a custom Docker image for Dynatrace configuration
-      - name: Set up Dynatrace environment
-        run: |
-          docker pull dynatrace/dynatrace-configuration-as-code:${{ secrets.MONACO_IMAGE_VERSION }}
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-      - name: Configure Dynatrace
+      - name: Configure Dynatrace Variables
+        env:
+          DT_PLATFORM_TENANT_URL: ${{ secrets.DT_PLATFORM_TENANT_URL }}
+          DT_API_TOKEN: ${{ secrets.DT_API_TOKEN }}
         run: |
-          export TENANT_URL="${{ secrets.DT_PLATFORM_TENANT_URL }}"
-          export TENANT_TOKEN="${{ secrets.DT_API_TOKEN }}"
-          export CLIENT_ID="${{ secrets.DT_OAUTH_CLIENT_ID }}"
-          export CLIENT_SECRET="${{ secrets.DT_OAUTH_CLIENT_SECRET }}"
-          docker run --rm \
-            -e TENANT_URL -e TENANT_TOKEN -e CLIENT_ID -e CLIENT_SECRET \
-            -v $(pwd):/workspace \
-            dynatrace/dynatrace-configuration-as-code:${{ secrets.MONACO_IMAGE_VERSION }} \
-            monaco deploy /workspace/easytrade/monaco/manifest.yaml --project application -e dev --dry-run
+          echo "Dynatrace environment and API token are configured."
 
-      - name: Deploy Dynatrace configurations
-        run: |
-          export TENANT_URL="${{ secrets.DT_PLATFORM_TENANT_URL }}"
-          export TENANT_TOKEN="${{ secrets.DT_API_TOKEN }}"
-          export CLIENT_ID="${{ secrets.DT_OAUTH_CLIENT_ID }}"
-          export CLIENT_SECRET="${{ secrets.DT_OAUTH_CLIENT_SECRET }}"
-          docker run --rm \
-            -e TENANT_URL -e TENANT_TOKEN -e CLIENT_ID -e CLIENT_SECRET \
-            -v $(pwd):/workspace \
-            dynatrace/dynatrace-configuration-as-code:${{ secrets.MONACO_IMAGE_VERSION }} \
-            monaco deploy /workspace/easytrade/monaco/manifest.yaml --project application -e dev
+      - name: Run Dynatrace Configuration as Code
+        uses: docker://dynatrace/dynatrace-configuration-as-code
+        with:
+          args: "deploy -e $DT_PLATFORM_TENANT_URL -t $DT_API_TOKEN"
+        env:
+          DT_PLATFORM_TENANT_URL: ${{ secrets.DT_PLATFORM_TENANT_URL }}
+          DT_API_TOKEN: ${{ secrets.DT_API_TOKEN }}
