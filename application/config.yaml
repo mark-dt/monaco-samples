@@ -1,29 +1,21 @@
 configs:
   - id: managementZoneId
     config:
-      name: <Management Zone Name>                # Add your MZ name
+      name: Frontend Production
       template: mz.json
       parameters:
-        serviceTagValue:
-          type: environment
-          name: SERVICE_TAG_VALUE
-        k8sClusterName:
-          type: environment
-          name: KUBERNETES_CLUSTER_NAME
-        tagKey:
-          type: environment
-          name: TAG_KEY
+        serviceTagValue: Frontend
+        tagKey: Production
       skip: false
     type:
       settings:
         schema: 'builtin:management-zones'
-        schemaVersion: 1.0.6
         scope: environment
 
 
   - id: alertingProfileId
     config:
-      name: <Alerting Profile Name>               # Add your Alerting profile name
+      name: Frontend Production
       template: alerting-profile.json
       parameters:
         managementZone:
@@ -32,7 +24,7 @@ configs:
           configId: managementZoneId
           configType: 'builtin:management-zones'
           property: id
-      skip: false
+      skip: true
     type:
       settings:
         schema: 'builtin:alerting.profile'
@@ -54,7 +46,7 @@ configs:
         rumPercentage:
           type: environment
           name: RUM_PERCENTAGE
-      skip: false
+      skip: true
     type:
       api: application-web
 
@@ -76,7 +68,7 @@ configs:
         appDetectionPattern:
           type: environment
           name: APP_DETECTION_PATTERN
-      skip: false
+      skip: true
     type:
       settings:
         schema: 'builtin:rum.web.app-detection'
@@ -98,7 +90,7 @@ configs:
         problemNotificationUrl:
           type: environment
           name: PROBLEM_NOTIFICATION_URL
-      skip: false
+      skip: true
     type:
       settings:
         schema: 'builtin:problem.notifications'
@@ -135,7 +127,7 @@ configs:
           configId: applicationId
           configType: application-web
           property: id
-      skip: false
+      skip: true
     type:
       api: synthetic-monitor
 
@@ -154,7 +146,7 @@ configs:
         channelUrl:
           type: environment
           name: CHANNEL_URL
-      skip: false
+      skip: true
     type:
       settings:
         schema: 'builtin:ownership.teams'
@@ -191,7 +183,7 @@ configs:
         scheduleEndTimeOfDay:
           type: environment
           name: SCHEDULE_END_TIME_OF_DAY
-      skip: false
+      skip: true
     type:
       settings:
         schema: 'builtin:alerting.maintenance-window'
@@ -207,7 +199,7 @@ configs:
         references:
           - releaseProduct
       template: slo.json
-      skip: false
+      skip: true
       parameters:
         metricName:
           type: compound
@@ -247,7 +239,7 @@ configs:
           - releaseProduct
           - releaseStage
       template: slo.json
-      skip: false
+      skip: true
       parameters:
         metricName:
           type: compound
