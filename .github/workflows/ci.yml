@@ -14,14 +14,30 @@ jobs:
 
     steps:
       # Use a custom Docker image for Dynatrace configuration
-      - name: Configure Dynatrace
-        uses: docker://dynatrace/dynatrace-configuration-as-code:${{ secrets.MONACO_IMAGE_VERSION }}
-        env:
-          TENANT_URL: ${{ secrets.DT_PLATFORM_TENANT_URL }}
-          TENANT_TOKEN: ${{ secrets.DT_API_TOKEN }}
-          CLIENT_ID: ${{ secrets.DT_OAUTH_CLIENT_ID }}
-          CLIENT_SECRET: ${{ secrets.DT_OAUTH_CLIENT_SECRET }}
+      - name: Set up Dynatrace environment
         run: |
-          # Run monaco for easytrade original configs
-          monaco deploy ./easytrade/monaco/manifest.yaml --project application -e dev --dry-run
-          monaco deploy ./easytrade/monaco/manifest.yaml --project application -e dev
+          docker pull dynatrace/dynatrace-configuration-as-code:${{ secrets.MONACO_IMAGE_VERSION }}
+
+      - name: Configure Dynatrace
+        run: |
+          export TENANT_URL="${{ secrets.DT_PLATFORM_TENANT_URL }}"
+          export TENANT_TOKEN="${{ secrets.DT_API_TOKEN }}"
+          export CLIENT_ID="${{ secrets.DT_OAUTH_CLIENT_ID }}"
+          export CLIENT_SECRET="${{ secrets.DT_OAUTH_CLIENT_SECRET }}"
+          docker run --rm \
+            -e TENANT_URL -e TENANT_TOKEN -e CLIENT_ID -e CLIENT_SECRET \
+            -v $(pwd):/workspace \
+            dynatrace/dynatrace-configuration-as-code:${{ secrets.MONACO_IMAGE_VERSION }} \
+            monaco deploy /workspace/easytrade/monaco/manifest.yaml --project application -e dev --dry-run
+
+      - name: Deploy Dynatrace configurations
+        run: |
+          export TENANT_URL="${{ secrets.DT_PLATFORM_TENANT_URL }}"
+          export TENANT_TOKEN="${{ secrets.DT_API_TOKEN }}"
+          export CLIENT_ID="${{ secrets.DT_OAUTH_CLIENT_ID }}"
+          export CLIENT_SECRET="${{ secrets.DT_OAUTH_CLIENT_SECRET }}"
+          docker run --rm \
+            -e TENANT_URL -e TENANT_TOKEN -e CLIENT_ID -e CLIENT_SECRET \
+            -v $(pwd):/workspace \
+            dynatrace/dynatrace-configuration-as-code:${{ secrets.MONACO_IMAGE_VERSION }} \
+            monaco deploy /workspace/easytrade/monaco/manifest.yaml --project application -e dev
