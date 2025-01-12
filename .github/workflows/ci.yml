@@ -8,6 +8,17 @@ on:
 
 jobs:
 
+  debug-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull Docker Image
+        run: docker pull dynatrace/dynatrace-configuration-as-code:latest
+
+      - name: Check Available Commands
+        run: docker run --rm dynatrace/dynatrace-configuration-as-code:latest --help
+
+      - name: Interactive Debugging
+        run: docker run --rm -it dynatrace/dynatrace-configuration-as-code:latest /bin/sh
   sync-dynatrace:
     # Specify the type of machine to run this job
     runs-on: ubuntu-latest
