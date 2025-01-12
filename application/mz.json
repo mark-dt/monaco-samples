@@ -10,7 +10,7 @@
             {
               "key": "WEB_APPLICATION_TAGS",
               "operator": "EQUALS",
-              "tag": "{{ .tagKey }}:{{ .serviceTagValue }}"
+              "tag": "{{ .environment }}:{{ .serviceTagValue }}"
             }
           ]
         }
@@ -24,7 +24,7 @@
             {
               "key": "HTTP_MONITOR_TAGS",
               "operator": "EQUALS",
-              "tag": "{{ .tagKey }}:{{ .serviceTagValue }}"
+              "tag": "{{ .environment }}:{{ .serviceTagValue }}"
             }
           ]
         }
@@ -32,7 +32,7 @@
       {
         "enabled": true,
         "type": "SELECTOR",
-        "entitySelector": "type(SERVICE),databaseName.exists(),toRelationships.calls(type(SERVICE),tag({{ .tagKey }}:{{ .serviceTagValue }}))"
+        "entitySelector": "type(SERVICE),databaseName.exists(),toRelationships.calls(type(SERVICE),tag({{ .environment }}:{{ .serviceTagValue }}))"
       },
       {
         "enabled": true,
@@ -43,7 +43,7 @@
             {
               "key": "BROWSER_MONITOR_TAGS",
               "operator": "EQUALS",
-              "tag": "{{ .tagKey }}:{{ .serviceTagValue }}"
+              "tag": "{{ .environment }}:{{ .serviceTagValue }}"
             }
           ]
         }
@@ -57,7 +57,7 @@
             {
               "key": "SERVICE_TAGS",
               "operator": "EQUALS",
-              "tag": "{{ .tagKey }}:{{ .serviceTagValue }}"
+              "tag": "{{ .environment }}:{{ .serviceTagValue }}"
             }
           ],
           "serviceToHostPropagation": true,
@@ -104,7 +104,7 @@
             {
               "key": "HOST_TAGS",
               "operator": "EQUALS",
-              "tag": "{{ .tagKey }}:{{ .serviceTagValue }}"
+              "tag": "{{ .environment }}:{{ .serviceTagValue }}"
             }
           ],
           "hostToPGPropagation": true
@@ -119,7 +119,7 @@
             {
               "key": "PROCESS_GROUP_TAGS",
               "operator": "EQUALS",
-              "tag": "{{ .tagKey }}:{{ .serviceTagValue}}"
+              "tag": "{{ .environment }}:{{ .serviceTagValue}}"
             }
           ],
           "pgToHostPropagation": true,

@@ -5,7 +5,7 @@ configs:
       template: mz.json
       parameters:
         serviceTagValue: Frontend
-        tagKey: Production
+        environment: Prod
       skip: false
     type:
       settings:
