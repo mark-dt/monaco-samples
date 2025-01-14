@@ -1,0 +1,22 @@
+configs:
+  - id: ownership-workshop-hot
+    type:
+      settings:
+        schema: builtin:ownership.teams
+        scope: environment
+    config:
+      name: ownership-workshop-hot
+      template: owner_template.json
+      parameters:
+        personal_email: workshop@email.com
+
+  - id: dev_team
+    type:
+      settings:
+        schema: builtin:ownership.teams
+        scope: environment
+    config:
+      name: dev_team
+      template: dev_template.json
+      parameters:
+        personal_email: dev@email.com 

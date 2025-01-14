@@ -1,0 +1,22 @@
+{
+    "name": "{{ .name }}",
+    "description": null,
+    "identifier": "{{ .name }}",
+    "supplementaryIdentifiers": [],
+    "responsibilities": {
+        "development": true,
+        "security": true,
+        "operations": false,
+        "infrastructure": false,
+        "lineOfBusiness": false
+    },
+    "contactDetails": [
+        {
+            "integrationType": "EMAIL",
+            "email": " {{ .personal_email }}"
+        }
+    ],
+    "links": [],
+    "additionalInformation": [],
+    "externalId": null
+}
