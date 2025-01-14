@@ -2,16 +2,40 @@ name: Dynatrace Configuration as Code Pipeline
 
 on:
   push:
-    branches:
+    branches-ignore:
       - main
   pull_request:
     branches:
       - main
 
 jobs:
+  dynatrace-configuration-dry-run:
+    name: Dry Run Deploy Dynatrace Configuration
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Configure Dynatrace Variables
+        env:
+          DT_PLATFORM_TENANT_URL: ${{ secrets.DT_PLATFORM_TENANT_URL }}
+          DT_API_TOKEN: ${{ secrets.DT_API_TOKEN }}
+        run: |
+          echo "Dynatrace environment and API token are configured."
+
+      - name: Dry Run Dynatrace Configuration as Code
+        uses: docker://dynatrace/dynatrace-configuration-as-code
+        with:
+          args: "deploy manifest.yaml -p prod_config --dry-run"
+        env:
+          DT_PLATFORM_TENANT_URL: ${{ secrets.DT_PLATFORM_TENANT_URL }}
+          DT_API_TOKEN: ${{ secrets.DT_API_TOKEN }}
+
   dynatrace-configuration:
     name: Deploy Dynatrace Configuration
     runs-on: ubuntu-latest
+    if: github.ref_name == 'main'
 
     steps:
       - name: Checkout Code
