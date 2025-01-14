@@ -1,0 +1,28 @@
+{
+  "name": "{{ .name }}",
+  "severityRules": [{
+      "severityLevel": "ERRORS",
+      "tagFilterIncludeMode": "NONE",
+      "delayInMinutes": 10
+    }, {
+      "severityLevel": "PERFORMANCE",
+      "tagFilterIncludeMode": "NONE",
+      "delayInMinutes": 15
+    }, {
+      "severityLevel": "CUSTOM_ALERT",
+      "tagFilterIncludeMode": "NONE",
+      "delayInMinutes": 0
+    }, {
+      "severityLevel": "RESOURCE_CONTENTION",
+      "tagFilterIncludeMode": "NONE",
+
+      "delayInMinutes": 20
+    }, {
+      "severityLevel": "AVAILABILITY",
+      "tagFilterIncludeMode": "NONE",
+      "delayInMinutes": 0
+    }
+  ],
+  "managementZone": "{{ .managementZoneId }}",
+  "eventFilters": []
+}

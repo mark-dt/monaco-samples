@@ -1,6 +1,9 @@
 manifestVersion: 1.0
 projects:
-  - name: application
+  - name: sample_app
+  - name: sample_app_2 
+    path: sample_app_2 
+    type: simple
 
 environmentGroups:
   - name: production
@@ -13,11 +16,3 @@ environmentGroups:
           token:
             type: environment
             name: DT_API_TOKEN
-          # oAuth:
-          #   clientId:
-          #     type: environment
-          #     name: DT_OAUTH_CLIENT_ID
-          #   clientSecret:
-          #     type: environment
-          #     name: DT_OAUTH_CLIENT_SECRET
-

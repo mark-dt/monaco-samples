@@ -1,0 +1,15 @@
+configs:
+- id: workshop-ap
+  config:
+    name: 'Workshop Alerting 01'
+    parameters:
+      managementZoneId:
+        configId: workshop-mz
+        configType: builtin:management-zones
+        property: id
+        type: reference
+    template: workshop-ap.json
+  type:
+    settings:
+      schema: builtin:alerting.profile
+      scope: environment

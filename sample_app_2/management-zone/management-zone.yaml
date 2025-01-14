@@ -1,0 +1,12 @@
+configs:
+- id: workshop-mz
+  config:
+    name: Workshop MZ
+    parameters:
+      namespace: workshop-ns
+    template: workshop-mz.json
+    skip: false
+  type:
+    settings:
+      schema: builtin:management-zones
+      scope: environment

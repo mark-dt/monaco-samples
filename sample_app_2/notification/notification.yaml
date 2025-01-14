@@ -1,0 +1,21 @@
+configs:
+- id: workshop-notification 
+  config:
+    name: 'Workshop Email'
+    parameters:
+      alertingProfile: da2b3354-344a-3998-9e19-2360e2d5d761
+        #configId: workshop-ap
+        #configType: builtin:alerting.profile
+        #property: id
+        #type: reference
+      #receivers: workshop@email.ch
+      receivers:
+        type: list
+        values:
+            - "workshop-01@email.com"
+            - "workshop-02@email.com"
+    template: workshop-notification.json
+  type:
+    settings:
+      schema: builtin:problem.notifications
+      scope: environment

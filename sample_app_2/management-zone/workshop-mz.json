@@ -1,0 +1,32 @@
+{
+  "name": "{{ .name }}",
+  "description": "Management Zone for {{.namespace}}",
+  "rules": [{
+      "enabled": true,
+      "type": "ME",
+      "attributeRule": {
+        "entityType": "CLOUD_APPLICATION",
+        "conditions": [{
+            "key": "CLOUD_APPLICATION_NAMESPACE_NAME",
+            "operator": "EQUALS",
+            "stringValue": "{{.namespace}}",
+            "caseSensitive": true
+          }
+        ]
+      }
+    }, {
+      "enabled": true,
+      "type": "ME",
+      "attributeRule": {
+        "entityType": "CLOUD_APPLICATION_NAMESPACE",
+        "conditions": [{
+            "key": "CLOUD_APPLICATION_NAMESPACE_NAME",
+            "operator": "EQUALS",
+            "stringValue": "{{.namespace}}",
+            "caseSensitive": true
+          }
+        ]
+      }
+    }
+  ]
+}

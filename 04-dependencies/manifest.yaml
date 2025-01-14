@@ -1,0 +1,16 @@
+manifestVersion: "1.0"
+
+projects:
+  - name: project 
+    path: project 
+    type: simple
+
+environmentGroups:
+  - name: development
+    environments:
+      - name: development-environment
+        url:
+          value: https://ggg43721.sprint.dynatracelabs.com/
+        auth:
+          token:
+            name: DT_API_TOKEN
