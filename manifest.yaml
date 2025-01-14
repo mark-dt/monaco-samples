@@ -1,9 +1,7 @@
 manifestVersion: 1.0
 projects:
-  - name: sample_app_1
-  - name: sample_app_2 
-    path: sample_app_2 
-    type: simple
+  - name: prod_config
+  - name: test_config
 
 environmentGroups:
   - name: production

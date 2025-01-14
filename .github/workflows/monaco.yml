@@ -27,7 +27,7 @@ jobs:
       - name: Run Dynatrace Configuration as Code
         uses: docker://dynatrace/dynatrace-configuration-as-code
         with:
-          args: "deploy manifest.yaml"
+          args: "deploy manifest.yaml -p prod_config"
         env:
           DT_PLATFORM_TENANT_URL: ${{ secrets.DT_PLATFORM_TENANT_URL }}
           DT_API_TOKEN: ${{ secrets.DT_API_TOKEN }}
