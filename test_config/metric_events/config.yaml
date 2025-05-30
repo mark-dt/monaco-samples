@@ -1,0 +1,14 @@
+configs:
+  - id: metric-events
+    type:
+      settings:
+        schema: builtin:anomaly-detection.metric-events
+        scope: environment
+    config:
+      name: dev_team
+      template: me_template.json
+      parameters:
+        metric_key: cpu_usage 
+        threshold: 70
+        alert_condition: ABOVE
+        event_title: CPU above 70!
