@@ -22,3 +22,15 @@ configs:
     settings:
       schema: builtin:management-zones
       scope: environment
+
+- id: workshop-mz_3
+  config:
+    name: Workshop MZ 3
+    parameters:
+      namespace: workshop-ns-3
+    template: workshop-mz.json
+    skip: false
+  type:
+    settings:
+      schema: builtin:management-zones
+      scope: environment

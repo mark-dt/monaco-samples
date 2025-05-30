@@ -1,6 +1,0 @@
-{
-    "matcher": "{{ .matcher }}",
-    "pattern": "{{ .appDetectionPattern }}",
-    "applicationId": "{{ .applicationId }}"
-  }
-  
