@@ -25,7 +25,7 @@ configs:
 
 - id: workshop-mz_3
   config:
-    name: Workshop MZ 3
+    name: Workshop MZ 1
     parameters:
       namespace: workshop-ns-3
     template: workshop-mz.json
