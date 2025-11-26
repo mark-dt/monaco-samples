@@ -1,7 +1,6 @@
 manifestVersion: 1.0
 projects:
   - name: prod_config
-  - name: test_config
 
 environmentGroups:
   - name: production
