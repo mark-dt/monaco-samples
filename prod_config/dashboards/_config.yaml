@@ -1,0 +1,19 @@
+configs:
+- id: workshop-mz-overview
+  config:
+    name: "Workshop MZ Overview"
+    parameters:
+      managementZoneId:
+        configId: workshop-mz
+        configType: builtin:management-zones
+        property: id
+        type: reference
+      managementZoneName:
+        configId: workshop-mz
+        configType: builtin:management-zones
+        property: name
+        type: reference
+    template: workshop-overview.json
+    skip: false
+  type:
+    api: dashboard

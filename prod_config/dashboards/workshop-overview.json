@@ -1,0 +1,83 @@
+{
+  "dashboardMetadata": {
+    "name": "{{ .name }}",
+    "shared": true,
+    "owner": "monaco",
+    "preset": false,
+    "popularity": 1,
+    "hasConsistentColors": false,
+    "dashboardFilter": {
+      "timeframe": "-2h",
+      "managementZone": {
+        "id": "{{ .managementZoneId }}",
+        "name": "{{ .managementZoneName }}"
+      }
+    }
+  },
+  "tiles": [
+    {
+      "name": "Markdown",
+      "tileType": "MARKDOWN",
+      "configured": true,
+      "bounds": {
+        "top": 0,
+        "left": 0,
+        "width": 1216,
+        "height": 38
+      },
+      "tileFilter": {},
+      "markdown": "## {{ .name }}\nAll tiles are scoped to management zone **{{ .managementZoneName }}**."
+    },
+    {
+      "name": "Problems",
+      "tileType": "OPEN_PROBLEMS",
+      "configured": true,
+      "bounds": {
+        "top": 38,
+        "left": 0,
+        "width": 304,
+        "height": 304
+      },
+      "tileFilter": {}
+    },
+    {
+      "name": "Hosts",
+      "tileType": "HOSTS",
+      "configured": true,
+      "bounds": {
+        "top": 38,
+        "left": 304,
+        "width": 304,
+        "height": 304
+      },
+      "tileFilter": {},
+      "chartVisible": true
+    },
+    {
+      "name": "Services",
+      "tileType": "SERVICES",
+      "configured": true,
+      "bounds": {
+        "top": 38,
+        "left": 608,
+        "width": 304,
+        "height": 304
+      },
+      "tileFilter": {},
+      "chartVisible": true
+    },
+    {
+      "name": "Applications",
+      "tileType": "APPLICATIONS",
+      "configured": true,
+      "bounds": {
+        "top": 38,
+        "left": 912,
+        "width": 304,
+        "height": 304
+      },
+      "tileFilter": {},
+      "chartVisible": true
+    }
+  ]
+}
